@@ -1,0 +1,22 @@
+@startuml contractInteractions
+    interface "Token Holders" as holders
+
+    /'Insurance Fund '/
+    [Engine] -> [Insurance Fund] : Fees
+    [Engine] <- [Insurance Fund] : Shortfall
+    [Insurance Fund] -> [vAMM] : Shutdown
+
+    /'Fee Pool'/
+    [Engine] --> [Fee Pool] : Fees
+    [Fee Pool] --> holders : Fees paid out
+
+    /'vAMM'/
+    [Engine] --> [vAMM] : Get Prices
+    [vAMM] --> [Engine] : Store Positions
+    [Pricefeed] --> [vAMM] : Oracle
+
+    Users --> [Engine] : Interact with the Protocol
+
+    /'Notes'/
+
+@enduml
