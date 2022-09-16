@@ -1,5 +1,7 @@
 # Margined Protocol Architecture
 
+This is the internal architecture document for Margined Protocol
+
 ## Rough Overview
 
 There are five different contracts in the Protocol
