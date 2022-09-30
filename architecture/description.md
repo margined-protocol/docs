@@ -16,7 +16,7 @@ The Engine is the point of interaction for users with the protocol, and most met
 
 ### How the contracts interact:
 
-![Contract Interactions](contractInteractions.png)
+![Contract Interactions](Images/contractInteractions.png)
 
 ### What do the arrows represent?
 
