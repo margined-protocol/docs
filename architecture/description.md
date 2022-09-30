@@ -20,19 +20,14 @@ The Engine is the point of interaction for users with the protocol, and most met
 
 ### What do the arrows represent?
 
-1: A portion of fees from transactions go to the insurance fund
-
-2: Sometimes, the insurance fund is used to cover shortfall and bad debt that users accrue, to make all creditors whole
-
-3: The insurance fund has the power to shut all the vAMMs down, in the case of an emergency
-
-4 + 5: Like the insurance fund, a portion of fees from transactions in the engine go to the fee pool, and are then distributed to token holders
-
-6: The vAMM calculates the input and output prices when swapping and the Engine uses these to calculate position size
-
-7: The positional data that the vAMM returns is then stored in the Engine. Most of the data is user input, but the vAMM calculates the position size
-
-8: The vAMM calculates the funding payments, and to do so it receives pricing data from the on-chain oracle, which is implemented via the Pricefeed contract
+1. A portion of fees from transactions go to the insurance fund
+2. Sometimes, the insurance fund is used to cover shortfall and bad debt that users accrue, to make all creditors whole
+3. The insurance fund has the power to shut all the vAMMs down, in the case of an emergency
+4. The engine deposits a portion of the fees into the fee pool
+5. At some point, the funds in the fee pool are paid out to token holders
+6. The vAMM calculates the input and output prices when swapping and the Engine uses these to calculate position size
+7. The positional data that the vAMM returns is then stored in the Engine. Most of the data is user input, but the vAMM calculates the position size
+8. The vAMM calculates the funding payments, and to do so it receives pricing data from the on-chain oracle, which is implemented via the Pricefeed contract
 
 ### Margin Engine
 
