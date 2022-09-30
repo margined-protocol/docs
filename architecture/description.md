@@ -14,6 +14,8 @@ There are five different contracts in the Protocol
 
 The Engine is the point of interaction for users with the protocol, and most methods in the other contracts check whether the sender is the Engine. The Engine allows people to open/close positions, and to add/remove margin from existing positions
 
+![How the contracts interact:](contractInteractions.jpg)
+
 ## Margin Engine
 
 The Engine owns all of the contracts. This means that most of the methods that exist in the other contracts will error if the sender is not the Engine.
