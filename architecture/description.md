@@ -14,7 +14,9 @@ There are five different contracts in the Protocol
 
 The Engine is the point of interaction for users with the protocol, and most methods in the other contracts check whether the sender is the Engine. The Engine allows people to open/close positions, and to add/remove margin from existing positions
 
-![Title](contractInteractions.png)
+### How the contracts interact:
+
+![Contract Interactions](contractInteractions.png)
 
 ### What do the arrows represent?
 
