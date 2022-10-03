@@ -1,14 +1,13 @@
 @startuml removeMargin
 participant Participant
 actor       Actor       
-boundary    Boundary    
 control     Control     
 entity      Entity      
 database    Database    
 collections Collections 
 queue       Queue       
 Participant -> Actor : To actor 
-Participant -> Boundary : To boundary
+Participant -> Contract1 : To boundary
 Participant -> Control : To control
 Participant -> Entity : To entity
 Participant -> Database : To database
