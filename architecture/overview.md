@@ -4,7 +4,7 @@ This is the internal architecture document for Margined Protocol
 
 ## Overview
 
-There are five different contracts in the Protocol
+Margined Protocol is composed of the following components:
 
 - Margin Engine
 - Virtual automated market maker (vAMM)
@@ -14,11 +14,9 @@ There are five different contracts in the Protocol
 
 The Engine is the point of interaction for users with the protocol, and most methods in the other contracts check whether the sender is the Engine. The Engine allows people to open/close positions, and to add/remove margin from existing positions
 
-### How the contracts interact:
+### Component Diagram:
 
 ![Contract Interactions](Images/contractInteractions.png)
-
-### What do the arrows represent?
 
 1. A portion of fees from transactions go to the insurance fund
 2. Sometimes, the insurance fund is used to cover shortfall and bad debt that users accrue, to make all creditors whole
