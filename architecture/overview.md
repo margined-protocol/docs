@@ -33,7 +33,7 @@ Traders are users who take perpetual positions within the protocol. Liquidators 
 
 ### Margin Engine
 
-The margin engine manages the positions of protocol users ans is permissoned to perform actions with the vAMMs on behalf of users. Traders use the margin engine contract to open and close positions. Additionally traders are able to deposit and remove margin from their margin account within the engine as appropriate.
+The margin engine manages the positions of protocol users and is permissoned to perform actions with the vAMMs on behalf of users. Traders use the margin engine contract to open and close positions. Additionally, traders are able to deposit and remove margin from their margin account within the engine as appropriate.
 
 The margin engine holds all collateral of the traders, however should a shortfall occur the margin engine is able to withdraw funds from the insurance fund in order to cover a shortfall.
 
@@ -45,7 +45,7 @@ As part of the fee collection the margin engine pays a portion of the trading fe
 
 The vAMM acts as the mechanism for price discovery. The contract records the reserves of base and quote assets, and enables swapping input and output - returning a price to the engine. The vAMM also returns the size of the position that a user purchases, which is the amount of base asset.
 
-The vAMM is also uses the pricefeed contract to find the oracle price during settlement of funding payments..
+The vAMM also uses the pricefeed contract to find the oracle price during settlement of funding payments.
 
 ### Insurance Fund
 
