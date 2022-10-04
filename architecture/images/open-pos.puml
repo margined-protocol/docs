@@ -1,0 +1,35 @@
+@startuml open-pos
+actor           Trader    
+
+box "Margined Protocol" 
+participant     Engine    
+participant     vAMM     
+participant     "Insurance Fund" as Insurance    
+participant     "Fee Pool" as Pool    
+end box
+
+title Open Position (Long)
+
+== Engine checks ==
+Trader -> Engine : open_position()
+Engine -> Engine : require_additional_margin()
+
+== Swap Input ==
+
+Group is_increase
+    Engine -> Engine : internal_increase_position()
+    Engine -> vAMM : swap_input()
+end
+
+== Reply ==
+Group reply
+    vAMM -> Engine : increase_position_reply()
+    Group transfer_fees()
+        Engine -> Insurance : receiver Insurance Fund
+        Engine -> Pool : receiver Fee Pool
+    end 
+end
+
+Engine -> Trader : Transaction Receipts
+
+@enduml
