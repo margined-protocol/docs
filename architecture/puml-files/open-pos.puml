@@ -1,0 +1,16 @@
+@startuml open-pos
+actor           User       
+participant     Engine    
+participant     vAMM     
+participant     "Insurance Fund" as Insurance    
+participant     "Fee Pool" as Pool    
+
+title Open Position (Long)
+
+User -> Engine : open_position()
+Engine -> vAMM : swap_input()
+vAMM -> Engine : increase_position_reply()
+Engine -> Insurance : Fees to Insurance Fund
+Engine -> Pool : Fees to Fee Pool
+Engine -> User : Transaction Receipts
+@enduml

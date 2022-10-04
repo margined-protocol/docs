@@ -1,4 +1,4 @@
-@startuml contractInteractions
+@startuml component-diagram
     interface "Token Holders" as holders
 
     /'Insurance Fund '/
