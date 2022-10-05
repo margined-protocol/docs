@@ -1,4 +1,4 @@
-@startuml openPos
+@startuml close-pos
 participant Participant
 actor       Actor       
 boundary    Boundary    

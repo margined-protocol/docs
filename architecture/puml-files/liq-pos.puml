@@ -1,4 +1,4 @@
-@startuml addMargin
+@startuml liq-pos
 participant Participant
 actor       Actor       
 boundary    Boundary    
