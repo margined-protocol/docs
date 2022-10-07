@@ -1,4 +1,11 @@
 @startuml liq-pos
+
+actor       trader       
+participant engine
+collections vamm
+participant pricefeed
+actor       liquidator       
+
 participant Participant
 actor       Actor       
 boundary    Boundary    
