@@ -1,16 +1,35 @@
-@startuml remove-margin
-participant Participant
-actor       Actor       
-control     Control     
-entity      Entity      
-database    Database    
-collections Collections 
-queue       Queue       
-Participant -> Actor : To actor 
-Participant -> Contract1 : To boundary
-Participant -> Control : To control
-Participant -> Entity : To entity
-Participant -> Database : To database
-Participant -> Collections : To collections
-Participant -> Queue: To queue
+@startuml
+
+autonumber
+actor User    
+
+participant "Engine" as engine
+
+box "External"
+    collections "Eligible Collateral" as token
+end box
+
+
+title Remove Margin
+User -> engine : withdraw_margin(\n\tquote_asset_amount\n)
+activate engine
+
+== Check Margin ==
+
+engine -> engine : calc_remain_margin_with_funding_payment()
+
+engine -> engine : require(bad_debt == 0)
+
+engine -> engine : require(remain_margin >= quote_asset_amount)
+
+engine -> token : withdraw(\n\teligible_collateral\n\ttrader\n)
+
+token -> token : execute_transfer(user, amount)
+== Update Position ==
+
+engine -> engine : store_position()
+
+engine -> User : Tx receipt
+deactivate engine
+
 @enduml
