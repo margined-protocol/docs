@@ -34,7 +34,7 @@ Group open_reverse_position()
         vamm -> vamm: update_reserves()
     end
     
-    vamm -> engine: reverse_position_reply()
+    vamm -> engine: return()
     deactivate vamm
 end
 
