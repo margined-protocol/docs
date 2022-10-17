@@ -39,7 +39,7 @@ Group !is_increase
         vamm -> vamm: update_reserves()
     end
     
-    vamm -> engine: return price
+    vamm -> engine: return()
     deactivate vamm
 end
 
