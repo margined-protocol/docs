@@ -24,7 +24,7 @@ engine -> engine : require(remain_margin >= quote_asset_amount)
 
 engine -> token : withdraw(\n\teligible_collateral\n\ttrader\n)
 
-token -> token : execute_transfer(user, amount)
+token -> token : execute_transfer_from(\n\ttrader\n\tengine\n\tquote_asset_amount\n)
 == Update Position ==
 
 engine -> engine : store_position()

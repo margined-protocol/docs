@@ -50,10 +50,10 @@ Group reply
             alt Native
                 token -> token : funds.are_sufficient()
             else cw20
-                token -> token : transfer required funds
+                token -> token : execute_transfer_from(\n\ttrader\n\tengine\n\tquote_asset_amount\n)
             end
-            token -> pool : transfer fees
-            token -> insurance : transfer fees
+            token -> pool : execute_transfer_from(\n\tengine\n\tfee pool\n\ttoll fee\n)
+            token -> insurance : execute_transfer_from(\n\tengine\n\tinsurance fund\n\tspread fee\n)
             token -> engine : margin to vault
         end 
     else

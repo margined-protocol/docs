@@ -1,6 +1,6 @@
 @startuml
 autonumber
-actor User    
+actor user    
 
 box "Margined Protocol" 
     participant engine    
@@ -14,27 +14,28 @@ box "External"
 end box
 
 
-title Open Position (Increase)
-
-== Engine checks ==
-
-User -> engine : open_position(\n\tquote_asset_amount\n\tleverage\n)
+title Close Position (Partial)
+user -> engine : close_position()
 activate engine
 
-engine -> engine : require(margin_ratio >= initial_margin_ratio)
+alt !price_over_fluctuation_limit
+    engine -> engine : internal_close_position()
+else See Close Position (Partial)
+    ...
+end
 
-== Swap Input ==
+== Close position ==
 
-Group is_increase
-    engine -> vamm : swap_input(\n\tquote_asset_amount\n)
+Group internal_close_position()
+    engine -> vamm : swap_output(\n\tposition.size.value\n)
     activate vamm
 
     Group price from reserves
-        vamm -> vamm: get_input_price(\n\tquote_asset_amount\n)
+        vamm -> vamm: get_output_price(\n\tposition.size.value\n)
         vamm -> vamm: update_reserves()
     end
     
-    vamm -> engine: return price
+    vamm -> engine: return()
     deactivate vamm
 end
 
@@ -42,25 +43,22 @@ end
 Group reply
 
     engine -> engine: update_open_interest_notional()
-    engine -> engine: update_position
 
     Group transfer_fees()
         engine -> token : check collateral
         alt Native
             token -> token : funds.are_sufficient()
         else cw20
-            token -> token : execute_transfer_from(\n\ttrader\n\tengine\n\tquote_asset_amount\n)
+            token -> token : execute_transfer_from(\n\tengine\n\ttrader\n\tquote_asset_amount\n)
         end
         token -> pool : execute_transfer_from(\n\tengine\n\tfee pool\n\ttoll fee\n)
         token -> insurance : execute_transfer_from(\n\tengine\n\tinsurance fund\n\tspread fee\n)
-        token -> engine : margin to vault
-    end 
-
-    engine -> engine: require(margin_ratio >= initial_margin_ratio)
-
+        token -> engine : margin from vault
+    end     
+    engine -> engine: remove_position()
 end
 
-engine -> User : Tx Receipt
+engine -> user : Tx Receipt
 deactivate engine
 
 @enduml

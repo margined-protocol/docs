@@ -1,6 +1,6 @@
 @startuml
 autonumber
-actor User    
+actor user    
 
 box "Margined Protocol" 
     participant engine    
@@ -14,27 +14,28 @@ box "External"
 end box
 
 
-title Open Position (Increase)
-
-== Engine checks ==
-
-User -> engine : open_position(\n\tquote_asset_amount\n\tleverage\n)
+title Close Position (Partial)
+user -> engine : close_position()
 activate engine
 
-engine -> engine : require(margin_ratio >= initial_margin_ratio)
+alt price_over_fluctuation_limit && partial_liquidation_ratio < decimals
+    engine -> engine : calculate partial close notional
+else See Close Position (Whole)
+    ...
+end
 
-== Swap Input ==
+== Close position ==
 
-Group is_increase
-    engine -> vamm : swap_input(\n\tquote_asset_amount\n)
+Group open_reverse_position()
+    engine -> vamm : swap_input(\n\tpartial_close_notional\n)
     activate vamm
 
     Group price from reserves
-        vamm -> vamm: get_input_price(\n\tquote_asset_amount\n)
+        vamm -> vamm: get_input_price(\n\tpartial_close_notional\n)
         vamm -> vamm: update_reserves()
     end
     
-    vamm -> engine: return price
+    vamm -> engine: return()
     deactivate vamm
 end
 
@@ -42,14 +43,14 @@ end
 Group reply
 
     engine -> engine: update_open_interest_notional()
-    engine -> engine: update_position
+    engine -> engine: clear_position()
 
     Group transfer_fees()
         engine -> token : check collateral
         alt Native
             token -> token : funds.are_sufficient()
         else cw20
-            token -> token : execute_transfer_from(\n\ttrader\n\tengine\n\tquote_asset_amount\n)
+            token -> token : execute_transfer_from(\n\tengine\n\ttrader\n\tquote_asset_amount\n)
         end
         token -> pool : execute_transfer_from(\n\tengine\n\tfee pool\n\ttoll fee\n)
         token -> insurance : execute_transfer_from(\n\tengine\n\tinsurance fund\n\tspread fee\n)
@@ -57,10 +58,10 @@ Group reply
     end 
 
     engine -> engine: require(margin_ratio >= initial_margin_ratio)
-
+    
 end
 
-engine -> User : Tx Receipt
+engine -> user : Tx Receipt
 deactivate engine
 
 @enduml
