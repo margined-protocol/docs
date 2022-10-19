@@ -8,12 +8,7 @@ box "Margined Protocol"
     participant "insurance fund" as insurance    
 end box
 
-' box "External"
-'     collections "Eligible Collateral" as token
-' end box
-
-
-title Liquidate Position (Partial)
+title Liquidate Position (Whole)
 
 liquidator -> engine : liquidate(\n\ttrader\n)
 activate engine

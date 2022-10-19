@@ -11,7 +11,7 @@ end box
 
 
 title Add Margin
-User -> engine : deposit_margin(\n\tquote_asset_amount\n)
+User -> engine : deposit_margin(\n\tamount\n)
 activate engine
 
 == Check Collateral ==

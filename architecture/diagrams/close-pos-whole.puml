@@ -14,7 +14,7 @@ box "External"
 end box
 
 
-title Close Position (Partial)
+title Close Position (Whole)
 user -> engine : close_position()
 activate engine
 
