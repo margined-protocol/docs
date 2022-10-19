@@ -68,7 +68,19 @@ Adding multi-collateral will effect all parts of the protocol where tokens are t
 * Paying funding rate
 * Liquidation
 
-#### Deposition of withdrawing margin   
+#### Deposition of withdrawing margin
+
+As multiple collateral contracts are not cross-margined per collateral type therefore deposit and withdraw of collateral need no major changes, a user will maintain a single position per contract per collateral.
+
+When depositing non-quote asset collaterals the user will simply add the value to their existing margin. However, their buying power will only increase by the latest rate multiplied by the relevant risk factor.
+
+During a withdrawal a user may only remove as much collateral so that the margin ratio it greater than the the initial margin ratio.
+
+#### Opening and closing positions
+
+Scenarios:
+
+* open new position 
 
 ## On-Chain Governance
 
